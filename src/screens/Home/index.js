@@ -57,7 +57,7 @@ const HomeScreen = props => {
     async function fetchData() {
       await getAllCourses();
     }
-    fetchData();
+    return fetchData();
   }, []);
 
   const navigation = useNavigation();

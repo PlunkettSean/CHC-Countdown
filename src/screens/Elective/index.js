@@ -68,7 +68,7 @@ const ElectiveScreen = props => {
       await getStatusCourses("In Progress");
       await getStatusCourses("Not Complete");
     }
-    fetchData();
+    return fetchData();
   }, []);
 
   var complete = 0;
