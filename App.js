@@ -25,4 +25,5 @@ const App = () => {
   return <Router />;
 };
 LogBox.ignoreLogs(['Reanimated 2']);
+LogBox.ignoreAllLogs();//Ignore all log notifications
 export default App;
