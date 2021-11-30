@@ -23,12 +23,12 @@ const HomeScreen = props => {
           console.log("Courses retrieved successfully");
           let len = res.rows.length;
           // console.warn(len)
-          if (len > 0) {
+          if (len >= 0) {
             let results = [];
             for (let i = 0; i < len; i++) {
               let item = res.rows.item(i);
-              results.push({ id: item.id, code: item.code, name: item.name, credits: item.credits, semester: item.semester, status: item.status, designator: item.designator });
-              console.log(results[i])
+              results.push({ id: item.id, code: item.code, name: item.name, credits: item.credits, semester: item.semester, status: item.status, designator: item.designator, cnt: item.cnt });
+              // console.log(results[i])
             }
             setAllCourses(results);
 
@@ -42,29 +42,30 @@ const HomeScreen = props => {
     });
   }
   React.useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-      getAllCourses();
+    const unsubscribe = navigation.addListener('focus', async () => {
+      await getAllCourses();
     });
     return unsubscribe;
   }, [navigation]);
 
-  var credits = 0;
-  for (var i = 0; i < allCourses.length; i++) {
-    credits += allCourses[i].credits;
+  let credits = 0;
+  for (let i = 0; i < allCourses.length; i++) {
+    if (allCourses[i].cnt === 1) {
+      credits += allCourses[i].credits;
+    }
   }
 
-  useEffect(() => {
-    async function fetchData() {
-      await getAllCourses();
-    }
-    return fetchData();
+  useEffect(async () => {
+    await getAllCourses();
   }, []);
 
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
+
+
       <ImageBackground
-        source={require('../../../assets/images/wallpaper.jpg')}
+        source={require('../../../assets/images/griffin_background_small.jpg')}
         style={styles.image}>
       </ImageBackground>
       <SafeAreaView style={{ flex: 0.0 }}></SafeAreaView>
@@ -75,7 +76,7 @@ const HomeScreen = props => {
       </View>
       {/* Button */}
       <View style={styles.bottomContainer}>
-        <Text style={styles.countdown}>{120 - credits} credits until my graduation.</Text>
+        <Text style={styles.countdown}>{(credits > 120) ? 0 : 120 - credits} credits until my graduation.</Text>
         <Pressable
           style={styles.searchButton}
           onPress={() => navigation.navigate('Get started!')}>
