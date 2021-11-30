@@ -24,6 +24,13 @@ const styles = StyleSheet.create({
     flex: 1,
     flexWrap: 'wrap',
   },
+  designator: {
+    fontSize: 14,
+    marginLeft: 10,
+    flex: 1,
+    flexWrap: 'wrap',
+    fontStyle: 'italic',
+  },
   semester: {
     fontSize: 18,
     marginLeft: 10,

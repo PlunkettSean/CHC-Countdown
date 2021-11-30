@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   title: {
-    fontSize: 50,
+    fontSize: 45,
     fontWeight: 'bold',
     position: 'absolute',
     top: 0,
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   school: {
-    fontSize: 30,
+    fontSize: 25,
     fontWeight: 'bold',
     position: 'absolute',
     color: 'white',
@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     color: 'white',
     width: '100%',
     textAlign: 'center',
+    fontStyle: 'italic',
   },
   bottomContainer: {
     width: '100%',

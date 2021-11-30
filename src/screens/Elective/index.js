@@ -24,12 +24,12 @@ const ElectiveScreen = props => {
           console.log("Courses retrieved successfully");
           let len = res.rows.length;
           // console.warn(len)
-          if (len > 0) {
+          if (len >= 0) {
             let results = [];
             for (let i = 0; i < len; i++) {
               let item = res.rows.item(i);
-              results.push({ id: item.id, code: item.code, name: item.name, credits: item.credits, semester: item.semester, status: item.status, designator: item.designator });
-              console.log(results[i])
+              results.push({ id: item.id, code: item.code, name: item.name, credits: item.credits, semester: item.semester, status: item.status, designator: item.designator, relatedcode: item.relatedcode, cnt: item.cnt });
+              // console.log(results[i])
             }
             if (status == "Complete") {
               setCompleteCourses(results);
@@ -62,13 +62,10 @@ const ElectiveScreen = props => {
     return unsubscribe;
   }, [navigation]);
 
-  useEffect(() => {
-    async function fetchData() {
-      await getStatusCourses("Complete");
-      await getStatusCourses("In Progress");
-      await getStatusCourses("Not Complete");
-    }
-    return fetchData();
+  useEffect(async () => {
+    await getStatusCourses("Complete");
+    await getStatusCourses("In Progress");
+    await getStatusCourses("Not Complete");
   }, []);
 
   var complete = 0;

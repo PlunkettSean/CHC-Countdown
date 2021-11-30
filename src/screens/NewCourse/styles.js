@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -21,61 +21,53 @@ const styles = StyleSheet.create({
   },
   searchButton: {
     backgroundColor: 'red',
-    margin: 2,
+    position: 'absolute',
+    width: 50,
     height: 50,
-    borderRadius: 30,
+    borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: 'row',
-    zIndex: 100,
-    width: Dimensions.get('screen').width - 40,
-    marginHorizontal: 20,
+    right: 20,
   },
   searchButtonText: {
     color: 'white',
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 12,
   },
   bottomContainer: {
     width: '100%',
-    height: 60,
+    height: 50,
     position: 'absolute',
-    bottom: 20,
+    bottom: 10,
   },
   newCourseContainer: {
-    top: 20,
+    top: 10,
     padding: 15,
     width: '100%',
   },
   codeInput: {
-    fontSize: 18,
-    marginBottom: 20,
+    fontSize: 16,
+    marginBottom: 15,
     borderBottomWidth: 1.0,
     borderColor: 'lightgrey',
   },
   nameInput: {
-    fontSize: 18,
-    marginBottom: 20,
+    fontSize: 16,
+    marginBottom: 15,
     borderBottomWidth: 1.0,
     borderColor: 'lightgrey',
   },
   semesterInput: {
-    fontSize: 18,
-    marginBottom: 20,
+    fontSize: 16,
     borderBottomWidth: 1.0,
     borderColor: 'lightgrey',
-  },
-  creditsInput: {
-    fontSize: 18,
-    borderBottomWidth: 1.0,
-    borderColor: 'lightgrey',
-    marginBottom: 20,
+    marginBottom: 10,
   },
   dropDownButton: {
     width: '100%',
     height: 50,
     borderRadius: 8,
-    marginBottom: 20,
+    marginBottom: 15,
     borderColor: 'lightgrey',
     borderWidth: 1.0,
   },
@@ -90,7 +82,19 @@ const styles = StyleSheet.create({
   },
   dropDownRowTextStyle: {
     textAlign: 'left',
-    fontSize: 18,
+    fontSize: 16,
+  },
+  multiOptionContainerStyle: {
+    backgroundColor: 'red',
+  },
+  multiOptionsLabelStyle : {
+    fontSize: 16,
+  },
+  labelStyle : {
+    fontSize: 16,
+  },
+  containerStyle : {
+    marginBottom: 5,
   },
 });
 

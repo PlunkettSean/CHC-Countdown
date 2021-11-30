@@ -19,6 +19,7 @@ const Course = props => {
               ? `${post.name}`
               : `${post.name.substring(0, 28)}...`}
           </Text>
+          <Text style={styles.designator}>{post.designator}</Text>
         </View>
         <View style={{ flex: 1 }}>
           <Text style={styles.semester}>{post.semester}</Text>

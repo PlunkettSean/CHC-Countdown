@@ -27,12 +27,12 @@ const MajorScreen = props => {
           console.log("Courses retrieved successfully");
           let len = res.rows.length;
           // console.warn(len)
-          if (len > 0) {
+          if (len >= 0) {
             let results = [];
             for (let i = 0; i < len; i++) {
               let item = res.rows.item(i);
-              results.push({ id: item.id, code: item.code, name: item.name, credits: item.credits, semester: item.semester, status: item.status, designator: item.designator });
-              console.log(results[i])
+              results.push({ id: item.id, code: item.code, name: item.name, credits: item.credits, semester: item.semester, status: item.status, designator: item.designator, relatedcode: item.relatedcode, cnt: item.cnt });
+              // console.log(results[i])
             }
             if (status == "Complete") {
               setCompleteCourses(results);
@@ -65,13 +65,10 @@ const MajorScreen = props => {
     return unsubscribe;
   }, [navigation]);
 
-  useEffect(() => {
-    async function fetchData() {
-      await getStatusCourses("Complete");
-      await getStatusCourses("In Progress");
-      await getStatusCourses("Not Complete");
-    }
-    return fetchData();
+  useEffect(async () => {
+    await getStatusCourses("Complete");
+    await getStatusCourses("In Progress");
+    await getStatusCourses("Not Complete");
   }, []);
 
   var complete = 0;
@@ -79,13 +76,19 @@ const MajorScreen = props => {
   var notComplete = 0;
 
   for (var i = 0; i < completeCourses.length; i++) {
-    complete += completeCourses[i].credits;
+    if (completeCourses[i].cnt === 1) {
+      complete += completeCourses[i].credits;
+    }
   }
   for (var i = 0; i < inProgressCourses.length; i++) {
-    inProgress += inProgressCourses[i].credits;
+    if (inProgressCourses[i].cnt === 1) {
+      inProgress += inProgressCourses[i].credits;
+    }
   }
   for (var i = 0; i < notCompleteCourses.length; i++) {
-    notComplete += notCompleteCourses[i].credits;
+    if (notCompleteCourses[i].cnt === 1) {
+      notComplete += notCompleteCourses[i].credits;
+    }
   }
 
   return (
