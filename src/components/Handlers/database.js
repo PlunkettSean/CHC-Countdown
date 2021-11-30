@@ -17,7 +17,9 @@ module.exports = {
                     semester VARCHAR(10),
                     credits INTEGER,
                     status VARCHAR(15),
-                    designator VARCHAR(20)
+                    designator VARCHAR(20),
+                    relatedcode VARCHAR(10),
+                    cnt INTEGER
                 );`,
                 [],
                 (sqlTxn, res) => {
@@ -47,11 +49,11 @@ module.exports = {
                         let results = [];
                         for (let i = 0; i < len; i++) {
                             let item = res.rows.item(i);
-                            results.push({ id: item.id, code: item.code, name: item.name, credits: item.credits, semester: item.semester, status: item.status, designator: item.designator });
+                            results.push({ id: item.id, code: item.code, name: item.name, credits: item.credits, semester: item.semester, status: item.status, designator: item.designator, relatedcode: item.relatedcode, cnt: item.cnt });
                             console.log(results[i])
                         }
                         // console.warn('[DATA]', results[0])
-                        list = results;
+                        let list = results;
                     }
                 },
                 error => {
@@ -72,9 +74,9 @@ module.exports = {
                 }
             });
 
-            for (let i = 0; i < courses.rows.length; index++) {
+            /* for (let i = 0; i < courses.rows.length; index++) {
                 console.log('[DBUG]', courses[i])
-            }
+            } */
 
             return courses;
         } catch (error) {
@@ -83,13 +85,13 @@ module.exports = {
         }
     },
 
-    addCourse: async function (code, name, credits, semester, status, designator) {
-        console.log('[DATA]', 'addCourse: ' + code + name);
+    addCourse: async function (code, name, credits, semester, status, designator, relatedcode, cnt) {
+        // console.log('[DATA]', 'addCourse: ' + code + name);
         courseDB.transaction(txn => {
             txn.executeSql(
-                `INSERT INTO ${tableName} (code, name, credits, semester, status, designator) VALUES ("${code}", "${name}", ${credits}, "${semester}", "${status}", "${designator}")`, [],
+                `INSERT INTO ${tableName} (code, name, credits, semester, status, designator, relatedcode, cnt) VALUES ("${code}", "${name}", ${credits}, "${semester}", "${status}", "${designator}", "${relatedcode}", "${cnt}")`, [],
                 (sqlTxn, res) => {
-                    console.log(`${category} category added successfully`);
+                    console.log(`${code} added successfully`);
                 },
                 error => {
                     console.log("error on adding course " + error.message);
@@ -98,5 +100,3 @@ module.exports = {
         });
     }
 }
-
-
